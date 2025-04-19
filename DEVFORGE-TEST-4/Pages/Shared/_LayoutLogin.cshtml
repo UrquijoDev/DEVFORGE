@@ -10,22 +10,22 @@
 </head>
 <body>
     <div class="dashboard-layout">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Dashboard</h2>
-            </div>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li><a href="#" class="active"><span class="nav-icon">📊</span> Dashboard</a></li>
-                    <li><a href="#"><span class="nav-icon">📄</span> Pages</a></li>
-                    <li><a href="#"><span class="nav-icon">🛒</span> Sales</a></li>
-                    <li><a href="#"><span class="nav-icon">💬</span> Messages</a></li>
-                    <li><a href="#"><span class="nav-icon">👤</span> Profile</a></li>
-                    <li><a href="#"><span class="nav-icon">⚙️</span> Settings</a></li>
-                    <li><a href="#"><span class="nav-icon">❓</span> Help</a></li>
-                </ul>
+
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" asp-page="/index">DEVFORGE</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Perfil</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Servicios</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Proyecto</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
-        </aside>
 
         <main class="main-content-area">
             <header class="dashboard-header">
@@ -36,226 +36,42 @@
                 <div class="header-controls">
                     <input type="text" placeholder="Type here...">
                     <button class="icon-button" aria-label="Notifications">🔔</button>
-                    @* <button class="signin-button">Sign in</button> *@
                     <partial name="_LoginPartial" />
                 </div>
             </header>
 
             <section class="stats-cards">
                 <div class="stat-card stat-card--orange">
-                    <div class="card-icon">👤</div>
+                    <div class="card-icon">🛠️</div>
                     <div class="card-content">
-                        <span class="stat-number">1600</span>
-                        <span class="stat-label">Users Active</span>
+                        <a asp-page="/Index"class="stat-number">Proyectos</a>
+                        <span class="stat-label">Administra Proyectos</span>
                     </div>
-                    <span class="stat-change positive">+55%</span>
                 </div>
                 <div class="stat-card stat-card--dark">
-                    <div class="card-icon">🖱️</div>
+                    <div class="card-icon">🪙</div>
                     <div class="card-content">
-                        <span class="stat-number">357</span>
-                        <span class="stat-label">Click Events</span>
+                        <a class="stat-number">Servicios</a>
+                        <span class="stat-label">Administra Servicios</span>
                     </div>
-                    <span class="stat-change positive">+124%</span>
                 </div>
                 <div class="stat-card stat-card--dark">
-                    <div class="card-icon">🛒</div>
+                    <div class="card-icon">💀</div>
                     <div class="card-content">
-                        <span class="stat-number">2300</span>
-                        <span class="stat-label">Purchases</span>
+                        <a class="stat-number">Perfil</a>
+                        <span class="stat-label">Modifica tu Perfil</span>
                     </div>
-                    <span class="stat-change positive">+15%</span>
                 </div>
-                <div class="stat-card stat-card--dark">
-                    <div class="card-icon">👍</div>
-                    <div class="card-content">
-                        <span class="stat-number">940</span>
-                        <span class="stat-label">Likes</span>
-                    </div>
-                    <span class="stat-change positive">+90%</span>
-                </div>
+      
             </section>
 
-            <section class="dashboard-grid">
-                <section class="projects-section card">
-                    <div class="card-header">
-                        <h2>Projects</h2>
-                        <p class="subtitle">30 done this month</p>
-                    </div>
-                    <div class="projects-list-container">
-                        <div class="projects-list">
-                            <div class="project-header-row">
-                                <span>COMPANIES</span>
-                                <span>MEMBERS</span>
-                                <span>BUDGET</span>
-                                <span>COMPLETION</span>
-                            </div>
-                            <div class="project-row">
-                                <div class="project-company" data-label="Company">
-                                    <span class="project-icon"> M </span> Soft UI XD Version
-                                </div>
-                                <div class="project-members" data-label="Members">👤👤👤</div>
-                                <div class="project-budget" data-label="Budget">$14,000</div>
-                                <div class="project-completion" data-label="Completion">
-                                    <div class="completion-info">
-                                        <span class="percentage">61%</span>
-                                    </div>
-                                    <progress value="61" max="100"></progress>
-                                </div>
-                            </div>
-                            <div class="project-row">
-                                <div class="project-company" data-label="Company">
-                                    <span class="project-icon"> A </span> Add Progress Track
-                                </div>
-                                <div class="project-members" data-label="Members">👤👤</div>
-                                <div class="project-budget" data-label="Budget">$3,000</div>
-                                <div class="project-completion" data-label="Completion">
-                                    <div class="completion-info">
-                                        <span class="percentage">10%</span>
-                                    </div>
-                                    <progress value="10" max="100"></progress>
-                                </div>
-                            </div>
-                            <div class="project-row">
-                                <div class="project-company" data-label="Company">
-                                    <span class="project-icon"> F </span> Fix Platform Errors
-                                </div>
-                                <div class="project-members" data-label="Members">👤👤👤👤</div>
-                                <div class="project-budget" data-label="Budget">Not set</div>
-                                <div class="project-completion" data-label="Completion">
-                                    <div class="completion-info">
-                                        <span class="percentage completed">100%</span>
-                                    </div>
-                                    <progress class="completed" value="100" max="100"></progress>
-                                </div>
-                            </div>
-                            <div class="project-row">
-                                <div class="project-company" data-label="Company">
-                                    <span class="project-icon"> L </span> Launch our Mobile App
-                                </div>
-                                <div class="project-members" data-label="Members">👤👤👤👤</div>
-                                <div class="project-budget" data-label="Budget">$20,500</div>
-                                <div class="project-completion" data-label="Completion">
-                                    <div class="completion-info">
-                                        <span class="percentage completed">100%</span>
-                                    </div>
-                                    <progress class="completed" value="100" max="100"></progress>
-                                </div>
-                            </div>
-                            <div class="project-row">
-                                <div class="project-company" data-label="Company">
-                                    <span class="project-icon"> A </span> Add the New Pricing Page
-                                </div>
-                                <div class="project-members" data-label="Members">👤</div>
-                                <div class="project-budget" data-label="Budget">$500</div>
-                                <div class="project-completion" data-label="Completion">
-                                    <div class="completion-info">
-                                        <span class="percentage">25%</span>
-                                    </div>
-                                    <progress value="25" max="100"></progress>
-                                </div>
-                            </div>
-                            <div class="project-row">
-                                <div class="project-company" data-label="Company">
-                                    <span class="project-icon"> R </span> Redesign New Online Shop
-                                </div>
-                                <div class="project-members" data-label="Members">👤👤</div>
-                                <div class="project-budget" data-label="Budget">$2,000</div>
-                                <div class="project-completion" data-label="Completion">
-                                    <div class="completion-info">
-                                        <span class="percentage">40%</span>
-                                    </div>
-                                    <progress value="40" max="100"></progress>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+            @RenderBody()
 
-                <aside class="sidebar-cards-section">
-                    <section class="reviews-card card">
-                        <div class="card-header">
-                            <h2>Reviews</h2>
-                        </div>
-                        <div class="review-item">
-                            <span class="review-label">Positive Reviews</span>
-                            <span class="review-percentage">80%</span>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar positive" style="width: 80%;"></div>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <span class="review-label">Neutral Reviews</span>
-                            <span class="review-percentage">17%</span>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar neutral" style="width: 17%;"></div>
-                            </div>
-                        </div>
-                        <div class="review-item">
-                            <span class="review-label">Negative Reviews</span>
-                            <span class="review-percentage">3%</span>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar negative" style="width: 3%;"></div>
-                            </div>
-                        </div>
-                        <p class="review-text">More than 1,800,000 developers used Creative Tim's products and over 700,000 projects were created.</p>
-                        <button class="view-all-button">View all reviews</button>
-                    </section>
-
-                    <section class="orders-card card">
-                        <div class="card-header">
-                            <h2>Orders overview</h2>
-                            <p class="subtitle positive-text">↑ 24% this month</p>
-                        </div>
-                        <ul class="orders-list">
-                            <li class="order-item">
-                                <span class="order-icon green">✔️</span>
-                                <div class="order-details">
-                                    <span class="order-title">$2400, Design changes</span>
-                                    <span class="order-time">22 DEC 7:20 PM</span>
-                                </div>
-                            </li>
-                            <li class="order-item">
-                                <span class="order-icon red">➕</span>
-                                <div class="order-details">
-                                    <span class="order-title">New order #1832412</span>
-                                    <span class="order-time">21 DEC 11 PM</span>
-                                </div>
-                            </li>
-                            <li class="order-item">
-                                <span class="order-icon blue">💻</span>
-                                <div class="order-details">
-                                    <span class="order-title">Server payments for April</span>
-                                    <span class="order-time">21 DEC 9:34 PM</span>
-                                </div>
-                            </li>
-                            <li class="order-item">
-                                <span class="order-icon orange">💳</span>
-                                <div class="order-details">
-                                    <span class="order-title">New card added for order #4395133</span>
-                                    <span class="order-time">20 DEC 2:20 AM</span>
-                                </div>
-                            </li>
-                            <li class="order-item">
-                                <span class="order-icon purple">🔑</span>
-                                <div class="order-details">
-                                    <span class="order-title">Unlock packages for development</span>
-                                    <span class="order-time">18 DEC 4:54 AM</span>
-                                </div>
-                            </li>
-                            <li class="order-item">
-                                <span class="order-icon grey">📦</span>
-                                <div class="order-details">
-                                    <span class="order-title">New order #9583120</span>
-                                    <span class="order-time">17 DEC</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </section>
-                </aside>
-            </section>
         </main>
     </div>
-    @RenderBody()
 </body>
 </html>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)

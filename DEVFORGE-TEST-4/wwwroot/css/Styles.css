@@ -1,96 +1,4 @@
-﻿/* Reset básico y estilos generales */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html, body {
-    height: 100%; /* Ensure body takes full height */
-}
-
-body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    background-color: #f8f9fa; /* Color de fondo gris claro */
-    color: #344767; /* Color de texto principal */
-    line-height: 1.6;
-    display: flex; /* Use flex for sidebar layout */
-}
-
-/* Layout principal con Sidebar */
-.dashboard-layout {
-    display: flex;
-    width: 100%;
-    min-height: 100vh; /* Minimum height */
-}
-
-/* Sidebar (Navbar Lateral) */
-.sidebar {
-    width: 250px; /* Ancho del sidebar */
-    background-color: #343a40; /* Color oscuro del sidebar */
-    color: #fff;
-    padding: 20px 15px;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0; /* Prevent sidebar from shrinking */
-    height: 100vh; /* Full viewport height */
-    position: sticky; /* Make sidebar sticky */
-    top: 0; /* Stick to the top */
-    overflow-y: auto; /* Allow scrolling if content overflows */
-}
-
-.sidebar-header {
-    text-align: center;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #495057; /* Separator */
-}
-
-    .sidebar-header h2 {
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: #fff;
-    }
-
-.sidebar-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.sidebar-nav li {
-    margin-bottom: 5px;
-}
-
-.sidebar-nav a {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    color: #adb5bd; /* Color de enlace inactivo */
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-    font-size: 0.95rem;
-}
-
-    .sidebar-nav a:hover {
-        background-color: #495057; /* Fondo al pasar el mouse */
-        color: #fff;
-    }
-
-    .sidebar-nav a.active {
-        background-color: #fd7e14; /* Color naranja para activo */
-        color: #fff;
-        font-weight: 600;
-    }
-
-.sidebar-nav .nav-icon {
-    margin-right: 12px;
-    width: 20px; /* Ancho fijo para iconos */
-    text-align: center;
-    font-size: 1.1em; /* Tamaño de icono */
-}
-
+﻿
 /* Área de Contenido Principal */
 .main-content-area {
     flex-grow: 1; /* Take remaining space */
@@ -624,7 +532,7 @@ progress {
     }
 
     .sidebar {
-        width: 100%; /* Full width */
+        width: auto; /* Full width */
         height: auto; /* Auto height */
         position: static; /* Remove sticky positioning */
         margin-bottom: 20px;
