@@ -18,10 +18,11 @@
 else
 {
 
-    <li class="nav-item">
-            <a class="nav-link" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-            <a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ingresar</a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+            <li><a class="dropdown-item" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+            <li><a class="dropdown-item" id="register" asp-area="Identity" asp-page="/Account/Register">Registrarse</a></li>
+        </ul>
     </li>
 }
