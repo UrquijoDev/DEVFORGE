@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>@ViewData["Title"] - DEVFORGE_TEST_4</title>
+    <title>@ViewData["Title"] - DEVFORGE</title>
     <script type="importmap"></script>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container px-5">
-                <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+                <a class="navbar-brand" asp-page="/index">DEVFORGE</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -28,13 +28,13 @@
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Servicios</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Proyecto</a></li>
                         <li class="nav-item"><a class="nav-link" asp-area="" asp-page="/Index">Blog</a></li>
-                        <li class="nav-item dropdown">
+                        <partial name="_LoginPartial" />
+
+                  @*      <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ingresar</a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                <li><a class="dropdown-item" asp-area="" asp-page="/Index">Login</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-page="/Index">Registrarse</a></li>
                             </ul>
-                        </li>
+                        </li>  *@
                     </ul>
                 </div>
             </div>
