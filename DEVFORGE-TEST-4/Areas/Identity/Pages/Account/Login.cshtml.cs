@@ -102,7 +102,7 @@ namespace DEVFORGE_TEST_4.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = "/Privacy")
+        public async Task<IActionResult> OnPostAsync(string returnUrl = "/Admin/Index")
         {
             returnUrl ??= Url.Content("~/");
 

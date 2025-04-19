@@ -1,26 +1,25 @@
-﻿@page
-@model DEVFORGE_TEST_4.Pages.Admin.Service.CreateModel
+﻿@page 
+@model DEVFORGE_TEST_4.Pages.Admin.Service.EditModel
 @{
-    Layout = "_LayoutLogin";
+    Layout = "_Layout";
 }
-
 <div class="row">
     <div class="col-md-8 mx-auto rounded border p-3">
-        <h2 class="text-center mb-5">Nuevo Plan de Servicio</h2>
+        <h2 class="text-center mb-5">Editar Plan de Servicio</h2>
 
-        @if (!string.IsNullOrEmpty(Model.errorMessage))
+        @if (Model.errorMessage.Length > 0)
         {
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>@Model.errorMessage</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>@Model.errorMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
         }
-        else if (!string.IsNullOrEmpty(Model.successMessage))
+        else if (Model.successMessage.Length > 0)
         {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <strong>@Model.successMessage</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.successMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
         }
 
         <form method="post">
@@ -41,16 +40,16 @@
             </div>
 
             <div class="row mb-4">
-                <label class="col-sm-4 col-form-label">Características</label>
+                <label class="col-sm-4 col-form-label">Características (separadas por coma)</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" asp-for="FeaturesAsString" rows="5" placeholder="Escribe una característica por línea"></textarea>
-                    <span class="text-muted">Separa cada característica con una coma</span>
+                    <textarea class="form-control" asp-for="FeaturesAsString" rows="3"></textarea>
+                    <span asp-validation-for="FeaturesAsString" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <div class="offset-sm-4 col-sm-4 d-grid">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                 </div>
                 <div class="col-sm-4 d-grid">
                     <a class="btn btn-outline-primary" href="/Admin/Service/Index" role="button">Cancelar</a>
