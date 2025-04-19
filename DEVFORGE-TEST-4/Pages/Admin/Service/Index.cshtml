@@ -1,0 +1,53 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.Admin.Service.IndexModel
+@{
+    Layout = "_LayoutLogin";
+}
+<div class="row mb-5">
+    <div class="col">
+        <a class="btn btn-primary" asp-page='/Admin/Service/Create'>Nuevo Plan de Servicio</a>
+    </div>
+    <div class="col">
+    </div>
+</div>
+
+<section class="projects-section card">
+    <div class="card-header">
+        <h2>Service Plans</h2>
+        <p class="subtitle"></p>
+    </div>
+    <div class="projects-list-container">
+        <div class="projects-list">
+            <div class="project-header-row">
+                <span>Name</span>
+                <span>Price</span>
+                <span>Features</span>
+                <span>Action</span>
+            </div>
+
+            @foreach (var servicePlan in Model.ServicePlan)
+            {
+                <div class="project-row">
+                    <div class="project-company" data-label="Name">
+                        @servicePlan.Name
+                    </div>
+                    <div class="project-budget" data-label="Price">
+                        @servicePlan.Price
+                    </div>
+                    <div class="project-members" data-label="Features">
+                        <ul>
+                            @foreach (var feature in servicePlan.Features)
+                            {
+                                <li>@feature.Description</li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="project-completion" data-label="Action">
+                        <a class="btn btn-primary btn-sm" href="/Admin/ServicePlan/Edit?id=@servicePlan.Id">Editar</a>
+                        <a class="btn btn-danger btn-sm" href="/Admin/ServicePlan/Delete?id=@servicePlan.Id">Eliminar</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

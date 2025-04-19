@@ -1,0 +1,61 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.Admin.Service.CreateModel
+@{
+    Layout = "_LayoutLogin";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-3">
+        <h2 class="text-center mb-5">Nuevo Plan de Servicio</h2>
+
+        @if (!string.IsNullOrEmpty(Model.errorMessage))
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>@Model.errorMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(Model.successMessage))
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>@Model.successMessage</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <form method="post">
+            <div class="row mb-4">
+                <label class="col-sm-4 col-form-label">Nombre del Plan</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="ServiceDTO.Name" />
+                    <span asp-validation-for="ServiceDTO.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <label class="col-sm-4 col-form-label">Precio</label>
+                <div class="col-sm-8">
+                    <input class="form-control" asp-for="ServiceDTO.Price" />
+                    <span asp-validation-for="ServiceDTO.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <label class="col-sm-4 col-form-label">Características</label>
+                <div class="col-sm-8">
+                    <textarea class="form-control" asp-for="FeaturesAsString" rows="5" placeholder="Escribe una característica por línea"></textarea>
+                    <span class="text-muted">Separa cada característica con un salto de línea</span>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="offset-sm-4 col-sm-4 d-grid">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+                <div class="col-sm-4 d-grid">
+                    <a class="btn btn-outline-primary" href="/Admin/Service/Index" role="button">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -10,6 +10,8 @@ namespace DEVFORGE_TEST_4.Services
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<ServicePlan> ServicePlan { get; set; }
+        public DbSet<Feature> Features { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,6 +32,12 @@ namespace DEVFORGE_TEST_4.Services
             };
 
             builder.Entity<IdentityRole>().HasData(admin, cliente);
+
+            builder.Entity<ServicePlan>()
+              .HasMany(p => p.Features)
+              .WithOne(f => f.ServicePlan)
+              .HasForeignKey(f => f.ServicePlanId)
+              .OnDelete(DeleteBehavior.Cascade);
         }
 
 
