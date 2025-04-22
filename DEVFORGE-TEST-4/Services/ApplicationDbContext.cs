@@ -10,8 +10,13 @@ namespace DEVFORGE_TEST_4.Services
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+
         public DbSet<ServicePlan> ServicePlan { get; set; }
         public DbSet<Feature> Features { get; set; }
+
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<ProjectTag> ProjectTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -38,8 +43,19 @@ namespace DEVFORGE_TEST_4.Services
               .WithOne(f => f.ServicePlan)
               .HasForeignKey(f => f.ServicePlanId)
               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<ProjectTag>()
+                .HasKey(pt => new { pt.ProjectId, pt.TagId });
+
+            builder.Entity<ProjectTag>()
+                .HasOne(pt => pt.Project)
+                .WithMany(p => p.ProjectTags)
+                .HasForeignKey(pt => pt.ProjectId);
+
+            builder.Entity<ProjectTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.ProjectTags)
+                .HasForeignKey(pt => pt.TagId);
         }
-
-
     }
 }
