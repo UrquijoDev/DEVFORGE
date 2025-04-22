@@ -23,28 +23,41 @@
             </div>
         }
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="row mb-4">
                 <label class="col-sm-4 col-form-label">Título del Proyecto</label>
                 <div class="col-sm-8">
-                    <input class="form-control" asp-for="ProjectDTO.Title" />
-                    <span asp-validation-for="ProjectDTO.Title" class="text-danger"></span>
+                    <input class="form-control" asp-for="ProjectData.Title" />
+                    <span asp-validation-for="ProjectData.Title" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row mb-4">
                 <label class="col-sm-4 col-form-label">Descripción</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" asp-for="ProjectDTO.Description" rows="4"></textarea>
-                    <span asp-validation-for="ProjectDTO.Description" class="text-danger"></span>
+                    <textarea class="form-control" asp-for="ProjectData.Description" rows="4"></textarea>
+                    <span asp-validation-for="ProjectData.Description" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row mb-4">
-                <label class="col-sm-4 col-form-label">Etiquetas (separadas por coma)</label>
+                <label class="col-sm-4 col-form-label">Etiquetas</label>
                 <div class="col-sm-8">
-                    <textarea class="form-control" asp-for="TagsAsString" rows="3"></textarea>
-                    <span asp-validation-for="TagsAsString" class="text-danger"></span>
+                    <textarea class="form-control" asp-for="TagsAsString" rows="3" placeholder="html, css, react"></textarea>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <label class="col-sm-4 col-form-label">Imagen del Proyecto</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="file" asp-for="ImageFile" />
+                    @if (!string.IsNullOrEmpty(Model.ExistingImage))
+                    {
+                        <div class="mt-2">
+                            <img src="~/img/projects/@Model.ExistingImage" alt="Imagen actual" width="120" class="img-thumbnail" />
+                            <div class="text-muted">Imagen actual</div>
+                        </div>
+                    }
                 </div>
             </div>
 

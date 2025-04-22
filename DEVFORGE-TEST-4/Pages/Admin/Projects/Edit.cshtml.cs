@@ -8,19 +8,23 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
 {
     public class EditModel : PageModel
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public EditModel(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         [BindProperty]
-        public ProjectDTO ProjectDTO { get; set; } = new ProjectDTO();
+        public ProjectDTO ProjectData { get; set; } = new ProjectDTO();
 
         [BindProperty]
         public string TagsAsString { get; set; } = string.Empty;
 
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; }
+
+        public string ExistingImage { get; set; } = string.Empty;
         public string errorMessage = "";
         public string successMessage = "";
 
@@ -32,7 +36,7 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
                 return;
             }
 
-            var project = context.Projects
+            var project = _context.Projects
                 .Include(p => p.ProjectTags)
                 .ThenInclude(pt => pt.Tag)
                 .FirstOrDefault(p => p.Id == id);
@@ -43,10 +47,11 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
                 return;
             }
 
-            ProjectDTO.Title = project.Title;
-            ProjectDTO.Description = project.Description;
-            ProjectDTO.Tags = project.ProjectTags.Select(pt => pt.Tag.Name).ToList();
-            TagsAsString = string.Join(", ", ProjectDTO.Tags);
+            ProjectData.Title = project.Title;
+            ProjectData.Description = project.Description;
+            ProjectData.Tags = project.ProjectTags.Select(pt => pt.Tag.Name).ToList();
+            TagsAsString = string.Join(", ", ProjectData.Tags);
+            ExistingImage = project.ImageFileName;
         }
 
         public IActionResult OnPost(int id)
@@ -57,7 +62,7 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
                 return Page();
             }
 
-            var project = context.Projects
+            var project = _context.Projects
                 .Include(p => p.ProjectTags)
                 .FirstOrDefault(p => p.Id == id);
 
@@ -67,30 +72,26 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
                 return Page();
             }
 
-            // Actualizar datos del proyecto
-            project.Title = ProjectDTO.Title;
-            project.Description = ProjectDTO.Description;
+            project.Title = ProjectData.Title;
+            project.Description = ProjectData.Description;
 
-            // Eliminar tags actuales
-            context.ProjectTags.RemoveRange(project.ProjectTags);
+            
+            _context.ProjectTags.RemoveRange(project.ProjectTags);
 
-            // Procesar nuevas etiquetas
-            var tagNames = TagsAsString
-                .Split(',', StringSplitOptions.RemoveEmptyEntries)
+            
+            var tagNames = TagsAsString.Split(',', StringSplitOptions.RemoveEmptyEntries)
                 .Select(t => t.Trim().ToLower())
-                .Where(t => !string.IsNullOrWhiteSpace(t))
                 .Distinct()
                 .ToList();
 
             foreach (var tagName in tagNames)
             {
-                var existingTag = context.Tags.FirstOrDefault(t => t.Name.ToLower() == tagName);
-
+                var existingTag = _context.Tags.FirstOrDefault(t => t.Name.ToLower() == tagName);
                 if (existingTag == null)
                 {
                     existingTag = new Tag { Name = tagName };
-                    context.Tags.Add(existingTag);
-                    context.SaveChanges(); // Guardar para tener el Id
+                    _context.Tags.Add(existingTag);
+                    _context.SaveChanges();
                 }
 
                 project.ProjectTags.Add(new ProjectTag
@@ -100,7 +101,34 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
                 });
             }
 
-            context.SaveChanges();
+            
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                
+                if (!string.IsNullOrEmpty(project.ImageFileName))
+                {
+                    string oldPath = Path.Combine("wwwroot", "img", "projects", project.ImageFileName);
+                    if (System.IO.File.Exists(oldPath))
+                    {
+                        System.IO.File.Delete(oldPath);
+                    }
+                }
+
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(ImageFile.FileName)}";
+                string imagePath = Path.Combine("wwwroot", "img", "projects");
+
+                Directory.CreateDirectory(imagePath);
+                string fullPath = Path.Combine(imagePath, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    ImageFile.CopyTo(stream);
+                }
+
+                project.ImageFileName = fileName;
+            }
+
+            _context.SaveChanges();
             successMessage = "El proyecto fue actualizado correctamente.";
             return RedirectToPage("/Admin/Projects/Index");
         }

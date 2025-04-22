@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DEVFORGE_TEST_4.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250422052954_FifthMigration")]
-    partial class FifthMigration
+    [Migration("20250422055923_SixthMigration")]
+    partial class SixthMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,6 +136,10 @@ namespace DEVFORGE_TEST_4.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageFileName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

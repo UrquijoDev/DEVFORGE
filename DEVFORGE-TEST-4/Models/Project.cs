@@ -12,7 +12,8 @@ namespace DEVFORGE_TEST_4.Models
         [Required(ErrorMessage = "La descripción del proyecto es obligatoria")]
         public string Description { get; set; } = string.Empty;
 
-        // Relación muchos a muchos con Tags
+        public string ImageFileName { get; set; } = string.Empty;
+
         public List<ProjectTag> ProjectTags { get; set; } = new();
     }
 }

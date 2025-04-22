@@ -7,62 +7,78 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
 {
     public class CreateModel : PageModel
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
         public CreateModel(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
 
         [BindProperty]
-        public ProjectDTO ProjectDTO { get; set; } = new ProjectDTO();
+        public ProjectDTO ProjectData { get; set; } = new ProjectDTO();
 
         [BindProperty]
         public string TagsAsString { get; set; } = string.Empty;
+
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; }
 
         public string errorMessage = "";
         public string successMessage = "";
 
         public void OnGet() { }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
-                errorMessage = "Por favor, completa todos los campos requeridos.";
-                return;
+                errorMessage = "Por favor completa todos los campos.";
+                return Page();
             }
 
             var project = new Project
             {
-                Title = ProjectDTO.Title,
-                Description = ProjectDTO.Description,
+                Title = ProjectData.Title,
+                Description = ProjectData.Description,
                 ProjectTags = new List<ProjectTag>()
             };
 
-            // Procesar etiquetas
+            
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                string fileName = $"{Guid.NewGuid()}{Path.GetExtension(ImageFile.FileName)}";
+                string path = Path.Combine("wwwroot", "img", "projects");
+
+                Directory.CreateDirectory(path);
+                string fullPath = Path.Combine(path, fileName);
+
+                using (var stream = new FileStream(fullPath, FileMode.Create))
+                {
+                    ImageFile.CopyTo(stream);
+                }
+
+                project.ImageFileName = fileName;
+            }
+
+            
             if (!string.IsNullOrWhiteSpace(TagsAsString))
             {
-                var tagNames = TagsAsString
-                    .Split(',', StringSplitOptions.RemoveEmptyEntries)
+                var tagNames = TagsAsString.Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(t => t.Trim().ToLower())
-                    .Where(t => !string.IsNullOrWhiteSpace(t))
                     .Distinct()
                     .ToList();
 
                 foreach (var tagName in tagNames)
                 {
-                    // Buscar si ya existe la etiqueta
-                    var existingTag = context.Tags.FirstOrDefault(t => t.Name.ToLower() == tagName);
+                    var existingTag = _context.Tags.FirstOrDefault(t => t.Name.ToLower() == tagName);
 
                     if (existingTag == null)
                     {
                         existingTag = new Tag { Name = tagName };
-                        context.Tags.Add(existingTag);
-                        context.SaveChanges(); // Se guarda para obtener el Id
+                        _context.Tags.Add(existingTag);
+                        _context.SaveChanges();
                     }
 
-                    // Asociar etiqueta al proyecto
                     project.ProjectTags.Add(new ProjectTag
                     {
                         TagId = existingTag.Id,
@@ -71,15 +87,11 @@ namespace DEVFORGE_TEST_4.Pages.Admin.Projects
                 }
             }
 
-            context.Projects.Add(project);
-            context.SaveChanges();
+            _context.Projects.Add(project);
+            _context.SaveChanges();
 
-            successMessage = "El proyecto fue creado exitosamente.";
-            ModelState.Clear();
-            ProjectDTO = new ProjectDTO();
-            TagsAsString = "";
-
-            Response.Redirect("/Admin/Projects/Index");
+            successMessage = "Proyecto creado correctamente.";
+            return RedirectToPage("/Admin/Projects/Index");
         }
     }
 }

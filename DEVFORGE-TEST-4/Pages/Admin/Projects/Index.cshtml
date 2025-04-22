@@ -7,8 +7,6 @@
     <div class="col">
         <a class="btn btn-primary" asp-page='/Admin/Projects/Create'>Nuevo Proyecto</a>
     </div>
-    <div class="col">
-    </div>
 </div>
 
 <section class="projects-section card">
@@ -29,16 +27,24 @@
             {
                 <div class="project-row">
                     <div class="project-company" data-label="Título">
-                        @project.Title
+                        <div>
+                            <strong>@project.Title</strong>
+                            @if (!string.IsNullOrEmpty(project.ImageFileName))
+                            {
+                                <div class="mt-2">
+                                    <img src="~/img/projects/@project.ImageFileName" alt="Imagen del proyecto" width="120" class="img-thumbnail" />
+                                </div>
+                            }
+                        </div>
                     </div>
                     <div class="project-budget" data-label="Descripción">
                         @project.Description
                     </div>
                     <div class="project-members" data-label="Etiquetas">
                         <ul>
-                            @foreach (var tag in project.ProjectTags.Select(pt => pt.Tag))
+                            @foreach (var pt in project.ProjectTags)
                             {
-                                <li>@tag.Name</li>
+                                <li>@pt.Tag.Name</li>
                             }
                         </ul>
                     </div>
