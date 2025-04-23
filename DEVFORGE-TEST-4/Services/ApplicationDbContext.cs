@@ -18,6 +18,10 @@ namespace DEVFORGE_TEST_4.Services
         public DbSet<Tag> Tags { get; set; }
         public DbSet<ProjectTag> ProjectTags { get; set; }
 
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserProject> UserProjects { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -56,6 +60,17 @@ namespace DEVFORGE_TEST_4.Services
                 .HasOne(pt => pt.Tag)
                 .WithMany(t => t.ProjectTags)
                 .HasForeignKey(pt => pt.TagId);
+
+            builder.Entity<UserProject>()
+                .HasOne(up => up.UserProfile)
+                .WithMany(p => p.Projects)
+                .HasForeignKey(up => up.UserProfileId);
+
+            builder.Entity<UserProject>()
+                .HasOne(up => up.Project)
+                .WithMany()
+                .HasForeignKey(up => up.ProjectId);
+
         }
     }
 }

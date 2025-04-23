@@ -1,0 +1,111 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.Admin.Users.EditModel
+@{
+    Layout = "_LayoutLogin";
+}
+
+<div class="row">
+    <div class="col-md-8 mx-auto rounded border p-4">
+        <h2 class="text-center mb-4">Editar Perfil de Usuario</h2>
+
+        @if (!string.IsNullOrEmpty(Model.errorMessage))
+        {
+            <div class="alert alert-danger">@Model.errorMessage</div>
+
+            @if (!ModelState.IsValid)
+            {
+                <div class="alert alert-warning">
+                    <strong>Errores de validación:</strong>
+                    <ul>
+                        @foreach (var entry in ViewData.ModelState)
+                        {
+                            foreach (var error in entry.Value.Errors)
+                            {
+                                <li>@(entry.Key): @error.ErrorMessage</li>
+                            }
+                        }
+                    </ul>
+                </div>
+            }
+        }
+        else if (!string.IsNullOrEmpty(Model.successMessage))
+        {
+            <div class="alert alert-success">@Model.successMessage</div>
+        }
+
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="UserProfile.Id" />
+            <input type="hidden" asp-for="UserProfile.ApplicationUserId" />
+
+            <!-- Imagen -->
+            <div class="mb-3">
+                <label class="form-label">Foto de perfil</label>
+                <input class="form-control" type="file" asp-for="ImageFile" />
+                @if (!string.IsNullOrEmpty(Model.CurrentImage))
+                {
+                    <div class="mt-2">
+                        <p class="text-muted">Ruta esperada: /img/Users/@Model.CurrentImage</p>
+                        <img src="@Url.Content($"~/img/Users/{Model.CurrentImage}")" asp-append-version="true" alt="Foto actual" width="80" class="rounded-circle border" onerror="this.style.display='none'" />
+                    </div>
+                }
+            </div>
+
+            <!-- Rol -->
+            <div class="mb-3">
+                <label class="form-label">Rol Visible</label>
+                <input class="form-control" asp-for="UserProfile.RoleVisible" />
+                <span asp-validation-for="UserProfile.RoleVisible" class="text-danger"></span>
+            </div>
+
+            <!-- Bio -->
+            <div class="mb-3">
+                <label class="form-label">Biografía</label>
+                <textarea class="form-control" asp-for="UserProfile.Bio" rows="3"></textarea>
+                <span asp-validation-for="UserProfile.Bio" class="text-danger"></span>
+            </div>
+
+            <!-- Skills -->
+            <div class="mb-3">
+                <label class="form-label">Skills (separados por coma)</label>
+                <input class="form-control" asp-for="UserProfile.Skills" />
+                <span asp-validation-for="UserProfile.Skills" class="text-danger"></span>
+            </div>
+
+            <!-- Redes sociales -->
+            <div class="mb-3">
+                <label class="form-label">GitHub</label>
+                <input class="form-control" asp-for="UserProfile.GitHubUrl" type="url" />
+                <span asp-validation-for="UserProfile.GitHubUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">LinkedIn</label>
+                <input class="form-control" asp-for="UserProfile.LinkedInUrl" type="url" />
+                <span asp-validation-for="UserProfile.LinkedInUrl" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Twitter</label>
+                <input class="form-control" asp-for="UserProfile.TwitterUrl" type="url" />
+                <span asp-validation-for="UserProfile.TwitterUrl" class="text-danger"></span>
+            </div>
+
+            <!-- Proyectos (con múltiples selección en vez de checkboxes) -->
+            <div class="mb-3">
+                <label class="form-label">Proyectos en los que ha participado</label>
+                <select class="form-select" asp-for="SelectedProjectIds" multiple size="6">
+                    @foreach (var project in Model.AllProjects)
+                    {
+                        <option value="@project.Id" selected="@(Model.SelectedProjectIds.Contains(project.Id) ? "selected" : null)">@project.Title</option>
+                    }
+                </select>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a href="/Admin/Users/Index" class="btn btn-outline-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
