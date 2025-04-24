@@ -99,7 +99,7 @@ namespace DEVFORGE_TEST_4.Areas.Identity.Pages.Account
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            ReturnUrl = returnUrl;
+            returnUrl ??= Url.Page("/Admin/Index");
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = "/Admin/Index")

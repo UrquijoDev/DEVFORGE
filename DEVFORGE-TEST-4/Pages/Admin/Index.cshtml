@@ -5,6 +5,8 @@
 }
 
 <section class="dashboard-grid">
+
+    <!-- Proyectos recientes -->
     <section class="projects-section card">
         <div class="card-header">
             <h2>Últimos Proyectos</h2>
@@ -22,8 +24,12 @@
                         <div class="project-company" data-label="Título">
                             <strong>@project.Title</strong>
                         </div>
-                        <div class="project-budget" data-label="Descripción">
-                            @project.Description
+                        <div class="project-budget text-muted" data-label="Descripción">
+                            @{
+                                var desc = project.Description ?? "";
+                                var preview = desc.Length > 100 ? desc.Substring(0, 100) + "..." : desc;
+                            }
+                            @preview
                         </div>
                     </div>
                 }
@@ -31,8 +37,11 @@
         </div>
     </section>
 
+    <!-- Sidebar -->
     <aside class="sidebar-cards-section">
-        <section class="reviews-card card">
+
+        <!-- Servicios recientes -->
+        <section class="reviews-card card mb-4">
             <div class="card-header">
                 <h2>Servicios Recientes</h2>
             </div>
@@ -49,5 +58,42 @@
                 }
             </ul>
         </section>
+
+        <!-- Usuarios recientes -->
+        <section class="reviews-card card">
+            <div class="card-header">
+                <h2>Usuarios </h2>
+            </div>
+            <ul class="orders-list px-3 py-2">
+                @foreach (var user in Model.UserPreview)
+                {
+                    <li class="order-item d-flex align-items-center gap-3 py-2 border-bottom">
+                        @if (!string.IsNullOrEmpty(user.User?.ImageFileName))
+                        {
+                            <img src="@Url.Content($"~/img/Users/{user.User.ImageFileName}")"
+                                 alt="Foto"
+                                 width="48"
+                                 height="48"
+                                 class="rounded-circle border object-fit-cover"
+                                 style="object-fit: cover;"
+                                 onerror="this.style.display='none'" />
+                        }
+                        else
+                        {
+                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold"
+                                 style="width: 48px; height: 48px; font-size: 1rem;">
+                                @user.User?.FirstName?.FirstOrDefault()
+                            </div>
+                        }
+
+                        <span class="fw-semibold text-dark text-truncate" style="max-width: 150px;">
+                            @user.User?.FirstName @user.User?.LastName
+                        </span>
+                    </li>
+                }
+            </ul>
+        </section>
+
+
     </aside>
 </section>

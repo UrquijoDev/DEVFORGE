@@ -9,10 +9,11 @@
         <h2 class="mb-0">Perfiles de Usuario</h2>
         <p class="subtitle mb-0">Listado de perfiles personalizados por usuario</p>
     </div>
-    <div class="projects-list-container">
-        <div class="projects-list">
-            <div class="project-header-row text-center fw-bold">
-                <span class="text-start">Nombre</span>
+
+    <div class="table-responsive">
+        <div class="projects-list w-100">
+            <div class="project-header-row text-center fw-bold py-2 border-bottom bg-light">
+                <span class="text-start px-3">Nombre</span>
                 <span>Rol Visible</span>
                 <span>Bio</span>
                 <span>Skills</span>
@@ -23,83 +24,87 @@
 
             @foreach (var profile in Model.UserProfiles)
             {
-                <div class="project-row align-items-center">
-                    <div class="project-company text-start d-flex align-items-center gap-2 px-2" data-label="Nombre" style="flex-grow: 1;">
+                <div class="project-row align-items-center py-3 border-bottom">
+                    <div class="project-company d-flex align-items-center gap-3 px-3" style="flex: 1;">
                         <div class="flex-shrink-0">
                             @if (!string.IsNullOrEmpty(profile.User?.ImageFileName))
                             {
                                 <img src="@Url.Content($"~/img/Users/{profile.User?.ImageFileName}")"
                                      alt="Foto de @profile.User?.FirstName"
-                                     width="45" height="45"
+                                     width="50" height="50"
                                      class="rounded-circle border object-fit-cover"
                                      onerror="this.style.display='none'" />
-
                             }
                             else
                             {
                                 <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold"
-                                     style="width: 45px; height: 45px; font-size: 1em;">
+                                     style="width: 50px; height: 50px;">
                                     @profile.User?.FirstName?.FirstOrDefault()
                                 </div>
                             }
                         </div>
-                        <div class="fw-semibold text-truncate" style="min-width: 120px; max-width: none !important;">
+                        <div class="fw-semibold text-truncate" style="min-width: 150px;">
                             @profile.User?.FirstName @profile.User?.LastName
                         </div>
                     </div>
 
-                    <div class="project-budget text-center align-middle" data-label="Rol Visible" style="width: 120px; overflow: hidden; text-overflow: ellipsis;">
-                        <strong>@(!string.IsNullOrWhiteSpace(profile.RoleVisible) ? profile.RoleVisible : "—")</strong>
-                    </div>
-                    <div class="project-members align-middle" data-label="Bio" style="min-width: 150px; max-width: 200px; overflow: hidden; text-overflow: ellipsis;">
-                        @(!string.IsNullOrWhiteSpace(profile.Bio) ? profile.Bio : "—")
-                    </div>
-                    <div class="project-members align-middle" data-label="Skills" style="min-width: 120px; max-width: 150px; overflow: hidden; text-overflow: ellipsis;">
-                        @(!string.IsNullOrWhiteSpace(profile.Skills) ? profile.Skills : "—")
-                    </div>
-                    <div class="project-members text-center align-middle" data-label="Redes" style="width: 100px;">
+                    <div class="text-center" style="width: 140px;"><strong>@(string.IsNullOrWhiteSpace(profile.RoleVisible) ? "—" : profile.RoleVisible)</strong></div>
+                    <div class="text-center text-muted" style="min-width: 200px;">@(string.IsNullOrWhiteSpace(profile.Bio) ? "—" : profile.Bio)</div>
+                    <div class="text-center text-muted" style="min-width: 160px;">@(string.IsNullOrWhiteSpace(profile.Skills) ? "—" : profile.Skills)</div>
+
+                    <div class="text-center" style="width: 130px;">
                         <ul class="list-unstyled mb-0" style="font-size: 0.9em;">
                             @if (!string.IsNullOrWhiteSpace(profile.GitHubUrl))
                             {
-                                <li class="text-truncate"><a href="@profile.GitHubUrl" target="_blank">GitHub</a></li>
+                                <li><a href="@profile.GitHubUrl" target="_blank">GitHub</a></li>
                             }
                             @if (!string.IsNullOrWhiteSpace(profile.LinkedInUrl))
                             {
-                                <li class="text-truncate"><a href="@profile.LinkedInUrl" target="_blank">LinkedIn</a></li>
+                                <li><a href="@profile.LinkedInUrl" target="_blank">LinkedIn</a></li>
                             }
                             @if (!string.IsNullOrWhiteSpace(profile.TwitterUrl))
                             {
-                                <li class="text-truncate"><a href="@profile.TwitterUrl" target="_blank">X (Twitter)</a></li>
+                                <li><a href="@profile.TwitterUrl" target="_blank">X (Twitter)</a></li>
                             }
                             @if (string.IsNullOrWhiteSpace(profile.GitHubUrl) &&
                            string.IsNullOrWhiteSpace(profile.LinkedInUrl) &&
                            string.IsNullOrWhiteSpace(profile.TwitterUrl))
                             {
-                                <li class="text-muted text-truncate">Sin redes</li>
+                                <li class="text-muted">Sin redes</li>
                             }
                         </ul>
                     </div>
-                    <div class="project-members text-center align-middle" data-label="Proyectos" style="width: 120px;">
+
+                    <div class="text-center" style="width: 130px;">
                         @if (profile.Projects.Any())
                         {
                             <ul class="list-unstyled mb-0" style="font-size: 0.9em;">
                                 @foreach (var up in profile.Projects.Take(2))
                                 {
-                                    <li class="text-truncate" style="max-width: 100px;">• @up.Project?.Title</li>
+                                    <li>• @up.Project?.Title</li>
                                 }
                                 @if (profile.Projects.Count > 2)
                                 {
-                                    <li class="text-muted text-truncate"><small>y @(profile.Projects.Count - 2) más</small></li>
+                                    <li class="text-muted"><small>y @(profile.Projects.Count - 2) más</small></li>
                                 }
                             </ul>
                         }
                         else
                         {
-                            <span class="text-muted text-truncate">Sin proyectos</span>
+                            <span class="text-muted">Sin proyectos</span>
                         }
                     </div>
-                    <div class="project-completion text-center align-middle" data-label="Acciones" style="width: 80px;">
+
+                    <div class="text-center d-flex justify-content-center gap-2" style="width: 150px;">
                         <a class="btn btn-primary btn-sm" href="/Admin/Users/Edit?id=@profile.Id">Editar</a>
+                        @if (User.Identity?.Name != profile.User?.Email)
+                        {
+                            <form method="post" asp-page-handler="Delete" asp-route-id="@profile.Id" onsubmit="return confirm('¿Estás seguro de eliminar este perfil?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center gap-1" title="Eliminar">
+                                    🗑️ <span>Eliminar</span>
+                                </button>
+                            </form>
+                        }
                     </div>
                 </div>
             }
