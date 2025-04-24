@@ -8,31 +8,6 @@
     <div class="col-md-8 mx-auto rounded border p-4">
         <h2 class="text-center mb-4">Editar Perfil de Usuario</h2>
 
-        @if (!string.IsNullOrEmpty(Model.errorMessage))
-        {
-            <div class="alert alert-danger">@Model.errorMessage</div>
-
-            @if (!ModelState.IsValid)
-            {
-                <div class="alert alert-warning">
-                    <strong>Errores de validación:</strong>
-                    <ul>
-                        @foreach (var entry in ViewData.ModelState)
-                        {
-                            foreach (var error in entry.Value.Errors)
-                            {
-                                <li>@(entry.Key): @error.ErrorMessage</li>
-                            }
-                        }
-                    </ul>
-                </div>
-            }
-        }
-        else if (!string.IsNullOrEmpty(Model.successMessage))
-        {
-            <div class="alert alert-success">@Model.successMessage</div>
-        }
-
         <form method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="UserProfile.Id" />
             <input type="hidden" asp-for="UserProfile.ApplicationUserId" />
@@ -44,7 +19,6 @@
                 @if (!string.IsNullOrEmpty(Model.CurrentImage))
                 {
                     <div class="mt-2">
-                        <p class="text-muted">Ruta esperada: /img/Users/@Model.CurrentImage</p>
                         <img src="@Url.Content($"~/img/Users/{Model.CurrentImage}")" asp-append-version="true" alt="Foto actual" width="80" class="rounded-circle border" onerror="this.style.display='none'" />
                     </div>
                 }
@@ -85,7 +59,7 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">Twitter</label>
+                <label class="form-label">X (Twitter)</label>
                 <input class="form-control" asp-for="UserProfile.TwitterUrl" type="url" />
                 <span asp-validation-for="UserProfile.TwitterUrl" class="text-danger"></span>
             </div>
