@@ -14,7 +14,7 @@
         <div class="projects-list w-100">
             <div class="project-header-row text-center fw-bold py-2 border-bottom bg-light">
                 <span class="text-start px-3">Nombre</span>
-                <span>Rol Visible</span>
+                <span>Rol</span>
                 <span>Bio</span>
                 <span>Skills</span>
                 <span>Redes</span>
@@ -49,7 +49,9 @@
                     </div>
 
                     <div class="text-center" style="width: 140px;"><strong>@(string.IsNullOrWhiteSpace(profile.RoleVisible) ? "—" : profile.RoleVisible)</strong></div>
-                    <div class="text-center text-muted" style="min-width: 200px;">@(string.IsNullOrWhiteSpace(profile.Bio) ? "—" : profile.Bio)</div>
+                    <div class="text-center text-muted" style="min-width: 200px;">
+                        @(string.IsNullOrWhiteSpace(profile.Bio) ? "—" : profile.Bio.Length > 50 ? profile.Bio.Substring(0, 50) + "..." : profile.Bio)
+                    </div>                   
                     <div class="text-center text-muted" style="min-width: 160px;">@(string.IsNullOrWhiteSpace(profile.Skills) ? "—" : profile.Skills)</div>
 
                     <div class="text-center" style="width: 130px;">

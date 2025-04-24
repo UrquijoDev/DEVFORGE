@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="project-budget" data-label="Descripción">
-                        @project.Description
+                        @(string.IsNullOrWhiteSpace(project.Description) ? "—" : project.Description.Length > 80 ? project.Description.Substring(0, 80) + "..." : project.Description)
                     </div>
                     <div class="project-members" data-label="Etiquetas">
                         <ul>

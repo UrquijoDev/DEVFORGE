@@ -1,0 +1,146 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.BlogModel
+@{
+    Layout = "_Layout";
+}
+    <main class="flex-shrink-0">
+
+        <!-- Page Content-->
+        <section class="py-5 position-relative";">
+            <div class="container px-5">
+                <h1 class="fw-bolder fs-3 mb-5 text-center">Miembros</h1>
+
+            <div id="userCarousel" class="carousel slide position-relative" data-bs-ride="false">
+                <div class="carousel-inner">
+                        @for (int i = 0; i < Model.UserProfiles.Count; i++)
+                        {
+                            var user = Model.UserProfiles[i];
+                            var isActive = i == 0 ? "active" : "";
+
+                        <div class="carousel-item @isActive" data-user-id="@user.Id">
+                            <div class="card border-0 shadow-lg p-4">
+                                <div class="row gx-0 align-items-center">
+                                        <div class="col-lg-4 d-flex justify-content-center py-4">
+                                            @if (!string.IsNullOrEmpty(user.User?.ImageFileName))
+                                            {
+                                                <img src="@Url.Content($"~/img/Users/{user.User.ImageFileName}")"
+                                                     alt="Foto de @user.User.FirstName"
+                                                     class="rounded-circle border shadow-lg"
+                                                     width="160"
+                                                     height="160"
+                                                     style="object-fit: cover;"
+                                                     onerror="this.style.display='none'" />
+                                            }
+                                            else
+                                            {
+                                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-lg"
+                                                     style="width: 160px; height: 160px; font-size: 2rem;">
+                                                    @user.User?.FirstName?.FirstOrDefault()
+                                                </div>
+                                            }
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="ps-lg-5 pt-3 pt-lg-0">
+                                                <h2 class="fw-bold mb-2">@user.User?.FirstName @user.User?.LastName</h2>
+                                                <p class="fs-5 text-muted mb-0">@(!string.IsNullOrWhiteSpace(user.RoleVisible) ? user.RoleVisible : "Sin rol visible")</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Flechas externas -->
+                    <button class="carousel-control-prev position-absolute top-50 translate-middle-y" type="button" data-bs-target="#userCarousel" data-bs-slide="prev" style="left: -60px;">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next position-absolute top-50 translate-middle-y" type="button" data-bs-target="#userCarousel" data-bs-slide="next" style="right: -60px;">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Siguiente</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    <!-- Lorem -->
+
+    <section class="py-5 bg-light">
+        <div class="container px-5">
+            <div class="row gx-5">
+                <div class="col-xl-8">
+                    <h2 class="fw-bold fs-3 mb-4">Acerca de mí</h2>
+
+                    <div class="mb-3">
+                        <div class="text-primary fw-semibold text-uppercase small mb-1">Rol</div>
+                        <h5 class="text-muted" data-profile="role">Cargando...</h5>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-primary fw-semibold text-uppercase small mb-1">Biografía</div>
+                        <p class="text-muted fs-5" data-profile="bio">Cargando biografía...</p>
+                    </div>
+
+                    <div>
+                        <div class="text-primary fw-semibold text-uppercase small mb-2">Skills</div>
+                        <div class="d-flex flex-wrap gap-2" data-profile="skills">
+                            <!-- Etiquetas se inyectan por JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4">
+                    <div class="card border-0 h-100">
+                        <div class="card-body p-4">
+                            <div class="d-flex h-100 align-items-center justify-content-center">
+                                <div class="text-center">
+                                    <div class="h6 fw-bolder">Contacto</div>
+                                    <p class="text-muted mb-4">
+                                        Para consultas, escríbeme a:
+                                        <br />
+                                        <a data-profile="email" href="#">Email</a>
+                                        <h5 class="text-muted mt-2" data-profile="phone"></h5>
+                                    </p>
+
+                                    <div class="h6 fw-bolder">Sígueme</div>
+                                    <a class="fs-5 px-2 link-dark" data-profile="github" href="#" target="_blank" style="display:none;"><i class="bi bi-github"></i></a>
+                                    <a class="fs-5 px-2 link-dark" data-profile="twitter" href="#" target="_blank" style="display:none;"><i class="bi bi-twitter"></i></a>
+                                    <a class="fs-5 px-2 link-dark" data-profile="linkedin" href="#" target="_blank" style="display:none;"><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container px-5">
+            <h2 class="fw-bolder fs-5 mb-4">Proyectos en los que he colaborado</h2>
+
+            <div id="projectCarousel" class="carousel slide position-relative" data-bs-ride="false" data-bs-interval="false">
+                <div class="carousel-inner">
+                    <!-- Proyectos se inyectan por JS -->
+                </div>
+
+                <!-- Controles -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    </main>
+@section Scripts {
+    <script src="~/js/profile-dynamic.js" asp-append-version="true"></script>
+}
+
