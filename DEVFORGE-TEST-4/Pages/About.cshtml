@@ -1,0 +1,77 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.AboutModel
+@{
+    Layout = "_Layout";
+}
+
+<body class="d-flex flex-column">
+    <main class="flex-shrink-0">
+
+        <header class="py-5" style="background: linear-gradient(to right, #1f2937, #374151); color: white;">
+            <div class="container px-5">
+                <div class="text-center my-5">
+                    <h1 class="fw-bolder mb-3">Nuestra misión es transformar ideas en soluciones digitales funcionales y escalables.</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">
+                        En Devforge nos apasiona construir productos de software que potencien negocios,
+                        automatizando procesos y mejorando la experiencia digital de sus usuarios.
+                    </p>
+                    <a class="btn btn-outline-light btn-lg" href="#vision   ">Ver visión</a>
+                </div>
+            </div>
+        </header>
+       
+        <section class="py-5 bg-light" id="vision">
+            <div class="container px-5 my-5">
+                <div class="row gx-5 align-items-center justify-content-center">
+                    <!-- Imagen redonda -->
+                    <div class="col-lg-5 mb-4 mb-lg-0 d-flex justify-content-center">
+                        <div class="rounded-circle overflow-hidden shadow-sm" style="width: 280px; height: 280px;">
+                            <img class="w-100 h-100 object-fit-cover"
+                                 src="~/img/Devforge.jpg"
+                                 alt="Devforge visión" />
+                        </div>
+                    </div>
+
+                    <!-- Texto destacado -->
+                    <div class="col-lg-7">
+                        <h2 class="fw-bold mb-3">Nuestra visión</h2>
+                        <p class="fs-5 text-muted mb-0">
+                            Convertirnos en una referencia de <strong>excelencia tecnológica</strong> en Latinoamérica,
+                            impulsando el crecimiento de nuestros clientes mediante soluciones digitales
+                            <strong>modernas, seguras y efectivas</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="py-5 bg-white">
+            <div class="container px-5 my-5">
+                <div class="text-center">
+                    <h2 class="fw-bolder">Nuestro equipo</h2>
+                    <p class="lead fw-normal text-muted mb-5">Profesionales apasionados por la tecnología y la innovación</p>
+                </div>
+                <div class="row gx-5 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    @foreach (var member in Model.TeamMembers)
+                    {
+                        <div class="col mb-5 d-flex justify-content-center">
+                            <div class="text-center">
+                                <div class="rounded-circle overflow-hidden mx-auto mb-3" style="width: 120px; height: 120px;">
+                                    <img src="@Url.Content(string.IsNullOrEmpty(member.User?.ImageFileName)
+                                ? "https://placehold.co/150x150?text=User"
+                                : $"~/img/Users/{member.User.ImageFileName}")"
+                                         class="w-100 h-100 object-fit-cover"
+                                         alt="@member.User?.FirstName" />
+                                </div>
+                                <h6 class="fw-bold mb-1">@member.User?.FirstName @member.User?.LastName</h6>
+                                <div class="text-muted small">@member.RoleVisible</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+
+    </main>
+</body>

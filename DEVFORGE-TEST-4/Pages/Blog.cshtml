@@ -8,7 +8,7 @@
         <!-- Page Content-->
         <section class="py-5 position-relative";">
             <div class="container px-5">
-                <h1 class="fw-bolder fs-3 mb-5 text-center">Miembros</h1>
+                <h1 class="fw-bolder fs-3 mb-5 text-center">Miembros DevForge</h1>
 
             <div id="userCarousel" class="carousel slide position-relative" data-bs-ride="false">
                 <div class="carousel-inner">
@@ -26,8 +26,8 @@
                                                 <img src="@Url.Content($"~/img/Users/{user.User.ImageFileName}")"
                                                      alt="Foto de @user.User.FirstName"
                                                      class="rounded-circle border shadow-lg"
-                                                     width="160"
-                                                     height="160"
+                                                     width="220"
+                                                     height="220"
                                                      style="object-fit: cover;"
                                                      onerror="this.style.display='none'" />
                                             }
@@ -51,15 +51,18 @@
                         }
                     </div>
 
-                    <!-- Flechas externas -->
-                    <button class="carousel-control-prev position-absolute top-50 translate-middle-y" type="button" data-bs-target="#userCarousel" data-bs-slide="prev" style="left: -60px;">
-                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next position-absolute top-50 translate-middle-y" type="button" data-bs-target="#userCarousel" data-bs-slide="next" style="right: -60px;">
-                        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
-                        <span class="visually-hidden">Siguiente</span>
-                    </button>
+                <!-- Flecha izquierda -->
+                <button class="carousel-control-prev position-absolute top-50 translate-middle-y" type="button" data-bs-target="#userCarousel" data-bs-slide="prev" style="left: -40px;">
+                    <span class="carousel-control-prev-icon" style="filter: brightness(0); width: 3rem; height: 3rem;" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+
+                <!-- Flecha derecha -->
+                <button class="carousel-control-next position-absolute top-50 translate-middle-y" type="button" data-bs-target="#userCarousel" data-bs-slide="next" style="right: -40px;">
+                    <span class="carousel-control-next-icon" style="filter: brightness(0); width: 3rem; height: 3rem;" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+
                 </div>
             </div>
         </section>
@@ -91,7 +94,7 @@
                 </div>
 
                 <div class="col-xl-4">
-                    <div class="card border-0 h-100">
+                    <div class="card border-0 h-auto">
                         <div class="card-body p-4">
                             <div class="d-flex h-100 align-items-center justify-content-center">
                                 <div class="text-center">
@@ -125,18 +128,28 @@
                     <!-- Proyectos se inyectan por JS -->
                 </div>
 
-                <!-- Controles -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#projectCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                <!-- Flecha izquierda -->
+                <button class="carousel-control-prev position-absolute top-50 translate-middle-y" type="button"
+                        data-bs-target="#projectCarousel" data-bs-slide="prev"
+                        style="left: -80px;">
+                    <span class="carousel-control-prev-icon" style="filter: brightness(0); width: 3rem; height: 3rem;" aria-hidden="true"></span>
                     <span class="visually-hidden">Anterior</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#projectCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+
+                <!-- Flecha derecha -->
+                <button class="carousel-control-next position-absolute top-50 translate-middle-y" type="button"
+                        data-bs-target="#projectCarousel" data-bs-slide="next"
+                        style="right: -80px;">
+                    <span class="carousel-control-next-icon" style="filter: brightness(0); width: 3rem; height: 3rem;" aria-hidden="true"></span>
                     <span class="visually-hidden">Siguiente</span>
                 </button>
             </div>
         </div>
     </section>
+
+
+
+
 
 
     </main>
