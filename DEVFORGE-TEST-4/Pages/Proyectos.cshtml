@@ -1,0 +1,38 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.ProyectosModel
+@{
+    Layout = "_Layout";
+}
+<body class="d-flex flex-column h-100">
+    <main class="flex-shrink-0">
+        <section class="py-5">
+            <div class="container px-5 my-2">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bolder">Nuestro Trabajo</h1>
+                    <p class="lead fw-normal text-muted mb-0">Portafolio Devforge</p>
+                </div>
+                <div class="row gx-5">
+                    @foreach (var project in Model.Projects)
+                    {
+                        var imagePath = string.IsNullOrEmpty(project.ImageFileName)
+                        ? "https://placehold.co/600x400?text=Sin+Imagen"
+                        : Url.Content($"~/img/Projects/{project.ImageFileName}");
+
+                        <div class="col-lg-6 mb-5">
+                            <a href="@Url.Page("/ProyectosInfo", new { id = project.Id })" class="text-decoration-none text-dark">
+                                <div class="card h-100 shadow border-0 rounded-4 hover-shadow transition">
+                                    <div class="card-body p-4 d-flex flex-column align-items-start">
+                                        <img class="img-fluid rounded-3 mb-3"
+                                             src="@imagePath"
+                                             alt="@project.Title" />
+                                        <h3 class="fw-bolder">@project.Title</h3>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
