@@ -1,0 +1,52 @@
+﻿@page
+@model DEVFORGE_TEST_4.Pages.ServiciosModel
+@{
+    Layout = "_Layout";
+}
+
+<main class="flex-shrink-0">
+    <section class="bg-light py-5">
+        <div class="container px-5 my-2">
+            <div class="text-center mb-5">
+                <h1 class="fw-bolder">Descubre Nuestros Planes</h1>
+                <p class="lead fw-normal text-muted mb-0">Soluciones a la medida de tus necesidades por Devforge Team</p>
+            </div>
+
+            <div class="row gx-5 justify-content-center">
+                @foreach (var plan in Model.ServicePlans)
+                {
+                    <div class="col-lg-6 col-xl-4 mb-4">
+                        <div class="card h-100 shadow border-0 rounded-4">
+                            <div class="card-body p-4 d-flex flex-column">
+                                <div class="mb-3">
+                                    <div class="d-flex align-items-baseline mb-2">
+                                        <span class="display-5 fw-bold">@plan.Price</span>
+                                        <span class="text-muted ms-1">/ mxm</span>
+                                    </div>
+                                    <div class="h5 fw-bold @(plan.Name.ToLower().Contains("pro") ? "text-primary" : "text-dark")">
+                                        @plan.Name
+                                    </div>
+                                </div>
+
+                                <ul class="list-unstyled mb-4 flex-grow-1">
+                                    @foreach (var feature in plan.Features)
+                                    {
+                                        <li class="mb-2 d-flex align-items-center">
+                                            <i class="bi bi-check-circle-fill text-primary me-2"></i> <span class="small">@feature.Description</span>
+                                        </li>
+                                    }
+                                </ul>
+
+                                <div class="d-grid mt-auto">
+                                    <a class="btn @(plan.Name.ToLower().Contains("pro") ? "btn-primary" : "btn-outline-primary") rounded-pill" href="#!">
+                                        Más información <i class="bi bi-arrow-right-short ms-1"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+</main>
