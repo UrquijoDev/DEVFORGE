@@ -20,8 +20,10 @@
                             <div class="card-body p-4 d-flex flex-column">
                                 <div class="mb-3">
                                     <div class="d-flex align-items-baseline mb-2">
+                                        <span class="display-5 fw-semibold me-1">$</span>
                                         <span class="display-5 fw-bold">@plan.Price</span>
-                                        <span class="text-muted ms-1">/ mxm</span>
+                                        <span class="text-muted ms-1">/ mes</span>
+
                                     </div>
                                     <div class="h5 fw-bold @(plan.Name.ToLower().Contains("pro") ? "text-primary" : "text-dark")">
                                         @plan.Name
@@ -36,12 +38,6 @@
                                         </li>
                                     }
                                 </ul>
-
-                                <div class="d-grid mt-auto">
-                                    <a class="btn @(plan.Name.ToLower().Contains("pro") ? "btn-primary" : "btn-outline-primary") rounded-pill" href="#!">
-                                        Más información <i class="bi bi-arrow-right-short ms-1"></i>
-                                    </a>
-                                </div>
                             </div>
                         </div>
                     </div>

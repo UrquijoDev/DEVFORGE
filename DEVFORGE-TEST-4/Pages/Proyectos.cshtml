@@ -22,9 +22,11 @@
                             <a href="@Url.Page("/ProyectosInfo", new { id = project.Id })" class="text-decoration-none text-dark">
                                 <div class="card h-100 shadow border-0 rounded-4 hover-shadow transition">
                                     <div class="card-body p-4 d-flex flex-column align-items-start">
-                                        <img class="img-fluid rounded-3 mb-3"
+                                        <img class="w-100 rounded-3 mb-3"
                                              src="@imagePath"
-                                             alt="@project.Title" />
+                                             alt="@project.Title"
+                                             style="height: 200px; object-fit: cover;" />
+
                                         <h3 class="fw-bolder">@project.Title</h3>
                                     </div>
                                 </div>

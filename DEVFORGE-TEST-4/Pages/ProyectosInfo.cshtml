@@ -7,25 +7,25 @@
 <body class="d-flex flex-column h-100">
     <main class="flex-shrink-0">
         <section class="py-5">
-            <div class="container px-5 my-3">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10 col-xl-8 text-center">
-
-                        <!-- Imagen del proyecto -->
-                        <img class="img-fluid rounded-3 mb-4 shadow mx-auto d-block w-75"
+            <div class="container px-5 my-4">
+                <div class="row gx-5 align-items-center">
+                    <!-- Imagen a la izquierda -->
+                    <div class="col-lg-6 mb-4 mb-lg-0 d-flex justify-content-center">
+                        <img class="img-fluid rounded shadow w-100"
                              src="@Url.Content(string.IsNullOrEmpty(Model.Project.ImageFileName)
-                             ? "https://placehold.co/800x400?text=Sin+Imagen"
-                             : $"~/img/Projects/{Model.Project.ImageFileName}")"
-                             alt="@Model.Project.Title" />
+                                 ? "https://placehold.co/800x500?text=Sin+Imagen"
+                                 : $"~/img/Projects/{Model.Project.ImageFileName}")"
+                             alt="@Model.Project.Title"
+                             style="max-height: 400px; object-fit: cover;" />
+                    </div>
 
-
-                        <!-- Título -->
+                    <!-- Contenido a la derecha -->
+                    <div class="col-lg-6">
                         <h1 class="fw-bolder mb-3">@Model.Project.Title</h1>
 
-                        <!-- Etiquetas -->
                         @if (Model.Project.ProjectTags.Any())
                         {
-                            <div class="mb-1">
+                            <div class="mb-3">
                                 @foreach (var tag in Model.Project.ProjectTags.Select(pt => pt.Tag))
                                 {
                                     <span class="badge bg-secondary me-2">@tag.Name</span>
@@ -33,19 +33,13 @@
                             </div>
                         }
 
-                        <!-- Descripción -->
-                        <p class="lead fw-normal text-muted text-break text-justify" style="white-space: pre-line;">
+                        <p class="lead text-muted text-break" style="white-space: pre-line;">
                             @Model.Project.Description
                         </p>
 
-                        <!-- Botón volver -->
-                        <div class="mt-4">
-                            <a href="@Url.Page("/Proyectos")" class="btn btn-outline-primary">
-                                ← Volver al portafolio
-                            </a>
-                        </div>
-
-
+                        <a href="@Url.Page("/Proyectos")" class="btn btn-outline-primary mt-3">
+                            ← Volver al portafolio
+                        </a>
                     </div>
                 </div>
             </div>
