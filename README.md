@@ -45,3 +45,7 @@ El sitio cuenta con las siguientes páginas:
     Diseño responsivo (adaptable a dispositivos móviles y desktop).
 
     Contenido textual y visual (imágenes, íconos, etc.) adecuado para cada sección.
+
+
+# Derechos reservados
+y tilin, si lees esto, corre todas las migraciones en la bd , y checa Default Conection para que llames a tu base de datos igual y no haya problemas, o modifica la cadena tu mismo , app, todo el chisme esta en appsettings 
